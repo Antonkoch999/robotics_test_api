@@ -8,6 +8,7 @@ from django.contrib.auth.models import Group, Permission
 group1 = Group.objects.get_or_create(name='administrator')
 group2 = Group.objects.get_or_create(name='dealer')
 group3 = Group.objects.get_or_create(name='user')
+
 can_add_plotter = Permission.objects.get(name='Can add plotter')
 can_change_plotter = Permission.objects.get(name='Can change plotter')
 can_delete_plotter = Permission.objects.get(name='Can delete plotter')

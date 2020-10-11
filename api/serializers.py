@@ -1,6 +1,7 @@
 from rest_framework import serializers
 from api.models import User, Plotter, Template
 from constans import USER_CLASS
+from django.contrib.auth.models import Group
 
 
 class UserRegisterSerializer(serializers.ModelSerializer):
@@ -17,6 +18,8 @@ class UserRegisterSerializer(serializers.ModelSerializer):
         )
         user.set_password(validated_data['password'])
         user.save()
+        group = Group.objects.get(name='user')
+        user.groups.add(group)
         return user
 
 
@@ -44,6 +47,8 @@ class UserDealerCreate(UserRegisterSerializer):
         user.set_password(validated_data['password'])
         user.class_user = USER_CLASS['Dealer']
         user.save()
+        group = Group.objects.get(name='dealer')
+        user.groups.add(group)
         return user
 
 
@@ -58,6 +63,8 @@ class UserUserCreate(UserRegisterSerializer):
         user.set_password(validated_data['password'])
         user.dealer_id = self.context['request'].user.id
         user.save()
+        group = Group.objects.get(name='user')
+        user.groups.add(group)
         return user
 
 
