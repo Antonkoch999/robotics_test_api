@@ -24,9 +24,29 @@ class UserRegisterSerializer(serializers.ModelSerializer):
 
 
 class UserListSerializer(serializers.ModelSerializer):
+    user_detail = serializers.CharField(source='get_user_url', read_only=True)
+
     class Meta:
         model = User
-        fields = ['id', 'username', 'first_name', 'email', ]
+        fields = ['id', 'username', 'first_name', 'email', 'user_detail']
+
+
+class UserUserListSerializer(serializers.ModelSerializer):
+    user_detail = serializers.CharField(source='get_user_user_url',
+                                        read_only=True)
+
+    class Meta:
+        model = User
+        fields = ['id', 'username', 'first_name', 'email', 'user_detail']
+
+
+class DealerListSerializer(serializers.ModelSerializer):
+    dealer_detail = serializers.CharField(source='get_dealer_url',
+                                          read_only=True)
+
+    class Meta:
+        model = User
+        fields = ['id', 'username', 'first_name', 'email', 'dealer_detail']
 
 
 class UserDetailList(serializers.ModelSerializer):
@@ -75,6 +95,11 @@ class PlotterAddSerializer(serializers.ModelSerializer):
 
 
 class PlotterDetailList(serializers.ModelSerializer):
+    plotter_update = serializers.CharField(source='get_plotter_update',
+                                           read_only=True)
+    plotter_delete = serializers.CharField(source='get_plotter_delete',
+                                           read_only=True)
+
     class Meta:
         model = Plotter
         fields = '__all__'
@@ -87,6 +112,9 @@ class TemplateAddSerializer(serializers.ModelSerializer):
 
 
 class TemplateDetailList(serializers.ModelSerializer):
+    template_change = serializers.CharField(source='get_template_change',
+                                            read_only=True)
+
     class Meta:
         model = Template
         fields = '__all__'

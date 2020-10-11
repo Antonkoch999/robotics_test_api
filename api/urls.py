@@ -5,12 +5,13 @@ from api.views import (UserListView, UserRegisterView, UserUpdateView,
                        TemplateUpdateView, UserDealerCreateView,
                        UserDealerUpdateView, UserDealerListView,
                        UserUserCreateView, UserUserUpdateView,
-                       UserUserListView, PlotterDealerList)
+                       UserUserListView, PlotterDealerList, api_root)
 
 app_name = "api"
 
 
 urlpatterns = [
+    path('', api_root),
     path('user/list/', UserListView.as_view(), name='user_list'),
     path('user/registration/', UserRegisterView.as_view(),
          name='registration'),

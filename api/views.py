@@ -4,12 +4,36 @@ from api.serializers import (UserListSerializer, UserRegisterSerializer,
                              UserDetailList, PlotterAddSerializer,
                              TemplateAddSerializer, PlotterDetailList,
                              TemplateDetailList, UserDealerCreate,
-                             UserUserCreate
+                             UserUserCreate, DealerListSerializer,
+                             UserUserListSerializer
                              )
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
 from constans import USER_CLASS
 from api.permissions import IsAdministrator, IsDealer, IsUser
-from django.shortcuts import render
+from rest_framework.decorators import api_view
+from rest_framework.reverse import reverse
+from rest_framework.response import Response
+
+
+@api_view(['GET'])
+def api_root(request):
+    """
+    The entry endpoint of our API.
+    """
+    return Response({
+        'users list': reverse('api:user_list', request=request),
+        'user registration': reverse('api:registration', request=request),
+        'user dealer list': reverse('api:user_dealer_list', request=request),
+        'user dealer create': reverse('api:user_dealer_create',
+                                      request=request),
+        'user user list': reverse('api:user_user_list', request=request),
+        'user user create': reverse('api:user_user_create', request=request),
+        'plotter user list': reverse('api:plotter_user_list', request=request),
+        'plotter list': reverse('api:plotter_list', request=request),
+        'plotter create': reverse('api:plotter_create', request=request),
+        'template list': reverse('api:template_list', request=request),
+        'template create': reverse('api:template_create', request=request),
+    })
 
 
 class UserRegisterView(generics.CreateAPIView):
@@ -29,7 +53,7 @@ class UserUpdateView(generics.RetrieveUpdateDestroyAPIView):
 
 
 class UserDealerListView(generics.ListAPIView):
-    serializer_class = UserListSerializer
+    serializer_class = DealerListSerializer
     queryset = models.User.objects.filter(class_user=USER_CLASS['Dealer'])
     permission_classes = (IsAdministrator | IsAdminUser, IsAuthenticated, )
 
@@ -47,7 +71,7 @@ class UserDealerUpdateView(generics.RetrieveUpdateDestroyAPIView):
 
 
 class UserUserListView(generics.ListAPIView):
-    serializer_class = UserListSerializer
+    serializer_class = UserUserListSerializer
     permission_classes = (IsDealer | IsAdminUser, IsAuthenticated, )
 
     def get_queryset(self):
