@@ -9,6 +9,7 @@ from api.serializers import (UserListSerializer, UserRegisterSerializer,
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
 from constans import USER_CLASS
 from api.permissions import IsAdministrator, IsDealer, IsUser
+from django.shortcuts import render
 
 
 class UserRegisterView(generics.CreateAPIView):
@@ -117,3 +118,4 @@ class TemplateUpdateView(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = TemplateDetailList
     queryset = models.Template.objects.all()
     permission_classes = (IsAdministrator | IsAdminUser, IsAuthenticated, )
+
