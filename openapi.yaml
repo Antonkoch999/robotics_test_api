@@ -1,0 +1,106 @@
+openapi: 3.0.2
+info:
+  title: Robotics API
+  description: My first test API
+  version: '1'
+  termsOfService: 'http://localhost:8000/api/'
+  contact:
+    name: Robotics API
+    url: 'http://localhost:8000/api/'
+    email: antonkoch999@gmail.com
+servers:
+  - url: 'http://localhost:8000/api/v1/'
+paths:
+  /user/list:
+    get:
+      tags:
+      - All users data
+      summary: "Get all users data"
+      operationId: AllUsers
+      parameters:
+        - $ref: '#/components/parameters/id'
+        - $ref: '#/components/parameters/username'
+        - $ref: '#/components/parameters/firstname'
+        - $ref: '#/components/parameters/email'
+
+      responses:
+        '200':
+          description: Successful response
+            content:
+            application/json:
+              schema:
+                - $ref: '#/components/schemas/200'
+        '404':
+          description: Not found response
+          content:
+            text/plain:
+              schema:
+                title: User not found
+                type: string
+                example: Not found
+components:
+
+  parameters:
+    id:
+        name: id
+        in: query
+        description: "unique user id"
+        schema:
+          type: string
+    username:
+        name: username
+        in: query
+        description: "username user"
+        schema:
+          type: string
+    firstname:
+        name: first_name
+        in: query
+        description: "First name user"
+        schema:
+          type: string
+    email:
+        name: email
+        in: query
+        description: "Email mail@mail.com format"
+        schema:
+          type: string
+          
+  schemas:
+    200:
+      title: User list
+      type: object
+      properties:
+        id:
+          type: number
+          items:
+            $ref: '#/components/parameters/id'
+          description: Placeholder description
+          example: 1
+        username:
+          type: string
+          items:
+            $ref: '#/components/parameters/username'
+          description: Username user
+          example: username
+        
+        firstname:
+          type: string
+          items: 
+            $ref: '#/components/parameters/firstname'
+          description: Firstname user
+          example: Adam
+        email:
+          type: string
+          items:
+            $ref: '#/components/parameters/email'
+          description: Email user
+          example: adam@gmail.com
+          
+            
+        
+                    
+                    
+                    
+                    
+                    
