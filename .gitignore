@@ -107,3 +107,4 @@ venv.bak/
 .idea/
 .gitignore/
 /secret_data.py
+/.env.dev

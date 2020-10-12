@@ -1,7 +1,6 @@
 from django.urls import reverse
 from rest_framework import status
 from rest_framework.test import APITestCase, APIClient
-
 from constans import USER_CLASS
 from api.models import User, Plotter, Template
 from django.contrib.auth.models import Group
@@ -19,6 +18,7 @@ class RegistrationTestCase(APITestCase):
 class AuthenticateGetTest(APITestCase):
 
     def setUp(self):
+
         self.client = APIClient()
         self.user = User.objects.create_superuser(username='admin',
                                                   email='admin@admin.com',
@@ -83,6 +83,7 @@ class AuthenticateGetTest(APITestCase):
 class PermissionsGetTest(APITestCase):
 
     def setUp(self):
+
         self.group_administrator = Group.objects.get_or_create(
             name='administrator')[0]
         self.group_dealer = Group.objects.get_or_create(name='dealer')[0]
@@ -369,6 +370,7 @@ class PermissionsPostTest(PermissionsGetTest):
 class PermissionsPutTest(PermissionsGetTest):
 
     def setUp(self):
+
         super().setUp()
         self.user = User.objects.create_user(
             username='test_user',

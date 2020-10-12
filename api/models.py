@@ -4,6 +4,7 @@ from django.contrib.auth.models import AbstractUser
 from constans import USER_CLASS
 # Create your models here.
 from rest_framework.reverse import reverse
+from django.contrib.auth.models import Group, Permission
 
 
 class User(AbstractUser):

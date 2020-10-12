@@ -5,14 +5,19 @@ import django.contrib.auth.validators
 from django.db import migrations, models
 import django.db.models.deletion
 import django.utils.timezone
-from django.contrib.auth.models import Group, Permission
+
 
 
 def user_group(apps, schema_editor):
+
+    Group = apps.get_model("auth.Group")
+    Permission = apps.get_model("auth.Permission")
+
     groups = {'administrator': None, 'dealer': None, 'user': None}
 
     for group in groups.keys():
         groups[group] = Group.objects.get_or_create(name=group)[0]
+        groups[group].save()
 
     permission_administrator_list = ('Can add plotter', 'Can change plotter',
                                      'Can delete plotter', 'Can view plotter',
@@ -38,6 +43,9 @@ def user_group(apps, schema_editor):
     groups['administrator'].permissions.add(*permission_administrator)
     groups['dealer'].permissions.add(*permission_dealer)
     groups['user'].permissions.add(*permission_user)
+    groups['administrator'].save()
+    groups['user'].save()
+    groups['dealer'].save()
 
 
 class Migration(migrations.Migration):
