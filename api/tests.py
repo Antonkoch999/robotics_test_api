@@ -83,7 +83,8 @@ class AuthenticateGetTest(APITestCase):
 class PermissionsGetTest(APITestCase):
 
     def setUp(self):
-        self.group_administrator = Group.objects.get_or_create(name='administrator')[0]
+        self.group_administrator = Group.objects.get_or_create(
+            name='administrator')[0]
         self.group_dealer = Group.objects.get_or_create(name='dealer')[0]
         self.group_user = Group.objects.get_or_create(name='user')[0]
         self.client = APIClient()

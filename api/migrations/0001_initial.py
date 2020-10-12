@@ -7,28 +7,30 @@ import django.db.models.deletion
 import django.utils.timezone
 from django.contrib.auth.models import Group, Permission
 
+
 def user_group(api, create_mode):
     groups = {'administrator': None, 'dealer': None, 'user': None}
 
     for group in groups.keys():
         groups[group] = Group.objects.get_or_create(name=group)[0]
 
-
     permission_administrator_list = ('Can add plotter', 'Can change plotter',
                                      'Can delete plotter', 'Can view plotter',
                                      'Can add template', 'Can change template',
-                                     'Can delete template', 'Can view template',
+                                     'Can delete template',
+                                     'Can view template',
                                      'Can add user', 'Can change user',
                                      'Can delete user',
                                      'Can view user')
 
-    permission_dealer_list = ('Can add user', 'Can change user', 'Can add plotter',
-                              'Can change plotter', 'Can view plotter',
-                              'Can view user')
+    permission_dealer_list = ('Can add user', 'Can change user',
+                              'Can add plotter', 'Can change plotter',
+                              'Can view plotter', 'Can view user')
 
     permission_user_list = ('Can view plotter',)
 
-    permission_dealer = Permission.objects.filter(name__in=permission_dealer_list)
+    permission_dealer = Permission.objects.filter(
+        name__in=permission_dealer_list)
     permission_user = Permission.objects.filter(name__in=permission_user_list)
     permission_administrator = Permission.objects.filter(
         name__in=permission_administrator_list)
@@ -52,7 +54,8 @@ class Migration(migrations.Migration):
             name='User',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('password', models.CharField(max_length=128, verbose_name='password')),
+                ('password', models.CharField(
+                    max_length=128, verbose_name='password')),
                 ('last_login', models.DateTimeField(blank=True, null=True, verbose_name='last login')),
                 ('is_superuser', models.BooleanField(default=False, help_text='Designates that this user has all permissions without explicitly assigning them.', verbose_name='superuser status')),
                 ('username', models.CharField(error_messages={'unique': 'A user with that username already exists.'}, help_text='Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.', max_length=150, unique=True, validators=[django.contrib.auth.validators.UnicodeUsernameValidator()], verbose_name='username')),
