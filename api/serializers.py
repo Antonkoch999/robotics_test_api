@@ -24,11 +24,11 @@ class UserRegisterSerializer(serializers.ModelSerializer):
 
 
 class UserListSerializer(serializers.ModelSerializer):
-    user_detail = serializers.CharField(source='get_user_url', read_only=True)
+    # user_detail = serializers.CharField(source='get_user_url', read_only=True)
 
     class Meta:
         model = User
-        fields = ['id', 'username', 'first_name', 'email', 'user_detail']
+        fields = '__all__'
 
 
 class UserUserListSerializer(serializers.ModelSerializer):

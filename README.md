@@ -31,6 +31,13 @@
 пленки.
 
 [REQUIREMENTS]
+В самом начале нам необходимо выполнить миграции командами:
+
+docker-compose run web python manage.py makemigrations
+
+и 
+
+docker-compose run web python manage.py migrate
 
 Создайте superuser командой:
 

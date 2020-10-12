@@ -15,8 +15,8 @@ class User(AbstractUser):
     def get_dealer_url(self):
         return reverse('api:user_dealer_update', kwargs={'pk': self.pk})
 
-    def get_user_url(self):
-        return reverse('api:user_update', kwargs={'pk': self.pk})
+    # def get_user_url(self):
+    #     return reverse('api:user_update', kwargs={'pk': self.pk})
 
     def get_user_user_url(self):
         return reverse('api:user_user_update', kwargs={'pk': self.pk})
