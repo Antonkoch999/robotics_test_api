@@ -8,7 +8,7 @@ import django.utils.timezone
 from django.contrib.auth.models import Group, Permission
 
 
-def user_group(api, create_mode):
+def user_group(apps, schema_editor):
     groups = {'administrator': None, 'dealer': None, 'user': None}
 
     for group in groups.keys():
