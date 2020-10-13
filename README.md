@@ -39,6 +39,10 @@ docker-compose run web python manage.py makemigrations
 
 docker-compose run web python manage.py migrate
 
+Далее давайте применим еще одну команду, которая создаст наши группы с нужными правами доступа:
+
+docker-compose run web python manage.py create_group
+
 Создайте superuser командой:
 
 docker-compose run web python manage.py createsuperuser
